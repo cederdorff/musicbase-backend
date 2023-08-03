@@ -1,7 +1,9 @@
+// ========== IMPORTS ========== //
 import express from "express";
 import cors from "cors";
 import dbConnection from "./db-connect.js";
 
+// ========== APP SETUP ========== //
 const app = express();
 const port = process.env.SERVER_PORT || 3333;
 app.use(express.json()); // to parse JSON bodies
@@ -11,7 +13,7 @@ app.listen(port, () => {
     console.log(`App listening on http://localhost:${port}`);
 });
 
-// ------ REST ENDPOINTS ------ //
+// ========== REST ENDPOINTS ========== //
 
 // GET Endpoint "/"
 app.get("/", (request, response) => {
