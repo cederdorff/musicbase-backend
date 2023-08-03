@@ -85,8 +85,8 @@ app.get("/songs/:id", (request, response) => {
 app.get("/albums", (request, response) => {
     const queryString = `
         SELECT * FROM artists, albums
-            WHERE albums.artist_id = artists.id
-            ORDER BY albums.title;
+        WHERE albums.artist_id = artists.id
+        ORDER BY albums.title;
     `;
     dbConnection.query(queryString, (error, results) => {
         if (error) {
@@ -101,12 +101,20 @@ app.get("/albums", (request, response) => {
 app.get("/albums/:id", (request, response) => {
     const id = request.params.id;
     const queryString = `
-        SELECT albums.title as albumTitle, songs.id as songId, songs.title as songTitle, songs.length, songs.release_date, songs_on_albums.position FROM albums, songs, songs_on_albums
-            WHERE albums.id = songs_on_albums.album_id
-                   && songs.id = songs_on_albums.song_id
-                   && albums.id =? 
-            ORDER BY songs_on_albums.position;
-    `;
+        SELECT
+            albums.title AS albumTitle,
+            songs.id AS songId,
+            songs.title AS songTitle,
+            songs.length,
+            songs.release_date AS releaseDate,
+            songs_on_albums.position
+        FROM albums
+        JOIN songs_on_albums
+            ON albums.id = songs_on_albums.album_id
+        JOIN songs
+            ON songs.id = songs_on_albums.song_id
+        WHERE albums.id = ?
+        ORDER BY albums.title, songs_on_albums.position;`;
     const values = [id];
 
     dbConnection.query(queryString, values, (error, results) => {
@@ -120,7 +128,7 @@ app.get("/albums/:id", (request, response) => {
                         id: song.songId,
                         title: song.songTitle,
                         length: song.length,
-                        releaseDate: song.release_date,
+                        releaseDate: song.releaseDate,
                         position: song.position
                     };
                 })
