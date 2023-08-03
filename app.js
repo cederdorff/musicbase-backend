@@ -33,10 +33,10 @@ app.get("/artists", (request, response) => {
 // GET Endpoint "/artists/:id" - get one artist
 app.get("/artists/:id", (request, response) => {
     const id = request.params.id;
-    const query = "SELECT * FROM artists WHERE id=?;"; // sql query
+    const queryString = "SELECT * FROM artists WHERE id=?;"; // sql query
     const values = [id];
 
-    dbConnection.query(query, values, (error, results, fields) => {
+    dbConnection.query(queryString, values, (error, results, fields) => {
         if (error) {
             console.log(error);
         } else {
@@ -60,10 +60,10 @@ app.get("/songs", (request, response) => {
 // GET Endpoint "/songs/:id" - get one song
 app.get("/songs/:id", (request, response) => {
     const id = request.params.id;
-    const query = "SELECT * FROM songs WHERE id=?;"; // sql query
+    const queryString = "SELECT * FROM songs WHERE id=?;"; // sql query
     const values = [id];
 
-    dbConnection.query(query, values, (error, results, fields) => {
+    dbConnection.query(queryString, values, (error, results, fields) => {
         if (error) {
             console.log(error);
         } else {
@@ -84,13 +84,13 @@ app.get("/albums", (request, response) => {
     });
 });
 
-// GET Endpoint "/songs/:id" - get one song
+// GET Endpoint "/albums/:id" - get one album
 app.get("/albums/:id", (request, response) => {
     const id = request.params.id;
-    const query = "SELECT * FROM albums WHERE id=?;"; // sql query
+    const queryString = "SELECT * FROM albums WHERE id=?;"; // sql query
     const values = [id];
 
-    dbConnection.query(query, values, (error, results, fields) => {
+    dbConnection.query(queryString, values, (error, results, fields) => {
         if (error) {
             console.log(error);
         } else {
