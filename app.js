@@ -102,7 +102,7 @@ app.get("/albums", (request, response) => {
     });
 });
 
-// GET Endpoint "/albums/:id" - get one album
+// GET Endpoint "/albums/:id" - get one album with songs
 app.get("/albums/:id", (request, response) => {
     const id = request.params.id;
     const queryString = /*sql*/ `
