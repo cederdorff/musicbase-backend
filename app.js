@@ -126,19 +126,23 @@ app.get("/albums/:id", (request, response) => {
         if (error) {
             console.log(error);
         } else {
-            const album = {
-                title: results[0].albumTitle,
-                songs: results.map(song => {
-                    return {
-                        id: song.songId,
-                        title: song.songTitle,
-                        length: song.length,
-                        releaseDate: song.releaseDate,
-                        position: song.position
-                    };
-                })
-            };
-            response.json(album);
+            if (results[0]) {
+                const album = {
+                    title: results[0].albumTitle,
+                    songs: results.map(song => {
+                        return {
+                            id: song.songId,
+                            title: song.songTitle,
+                            length: song.length,
+                            releaseDate: song.releaseDate,
+                            position: song.position
+                        };
+                    })
+                };
+                response.json(album);
+            } else {
+                response.json({ message: "No album found" });
+            }
         }
     });
 });
