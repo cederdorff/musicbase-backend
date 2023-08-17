@@ -52,6 +52,27 @@ app.get("/artists/:id", (request, response) => {
     });
 });
 
+// GET Endpoint "/artists/:id" - get one artist
+app.get("/artists/:id/albums", (request, response) => {
+    const id = request.params.id;
+
+    const queryString = /*sql*/ `
+    SELECT * FROM artists, albums 
+    WHERE artist_id=? AND
+    albums.artist_id = artists.id
+    ORDER BY albums.title;`; // sql query
+
+    const values = [id];
+
+    dbConnection.query(queryString, values, (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            response.json(results);
+        }
+    });
+});
+
 // GET Endpoint "/songs" - get all songs
 app.get("/songs", (request, response) => {
     const queryString = /*sql*/ `
