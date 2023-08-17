@@ -35,6 +35,23 @@ app.get("/artists", (request, response) => {
     });
 });
 
+// GET Endpoint "/artists/search?q=taylor" - get all artists
+app.get("/artists/search", (request, response) => {
+    const query = request.query.q.toLocaleLowerCase();
+    const queryString = /*sql*/ `
+    SELECT * 
+    FROM artists
+    WHERE name LIKE ?`;
+    const values = [`%${query}%`];
+    dbConnection.query(queryString, values, (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            response.json(results);
+        }
+    });
+});
+
 // GET Endpoint "/artists/:id" - get one artist
 app.get("/artists/:id", (request, response) => {
     const id = request.params.id;
