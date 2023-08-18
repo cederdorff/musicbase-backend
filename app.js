@@ -41,7 +41,8 @@ app.get("/artists/search", (request, response) => {
     const queryString = /*sql*/ `
     SELECT * 
     FROM artists
-    WHERE name LIKE ?`;
+    WHERE name LIKE ?
+    ORDER BY name`;
     const values = [`%${query}%`];
     dbConnection.query(queryString, values, (error, results) => {
         if (error) {
