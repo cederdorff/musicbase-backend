@@ -1,0 +1,142 @@
+[
+    {
+        "name": "Beyoncé",
+        "birthdate": "1981-09-04",
+        "activeSince": "1997-1998",
+        "genres": ["R&B", "Pop"],
+        "labels": ["Columbia Records", "Parkwood Entertainment"],
+        "website": "https://www.beyonce.com/",
+        "image": "beyonce.jpg",
+        "shortDescription": "En ikonisk R&B- og popkunstner kendt for hendes enestående sangtalent og scenepresence."
+    },
+    {
+        "name": "Eminem",
+        "birthdate": "1972-10-17",
+        "activeSince": "1992-1996",
+        "genres": ["Rap", "Hip-Hop"],
+        "labels": ["Shady Records", "Aftermath Entertainment"],
+        "website": "https://www.eminem.com/",
+        "image": "eminem.jpg",
+        "shortDescription": "En af de mest indflydelsesrige rappere nogensinde med en imponerende lyrisk evne."
+    },
+    {
+        "name": "Adele",
+        "birthdate": "1988-05-05",
+        "activeSince": "2006-2008",
+        "genres": ["Pop", "Soul"],
+        "labels": ["XL Recordings", "Columbia Records"],
+        "website": "https://www.adele.com/",
+        "image": "adele.jpg",
+        "shortDescription": "En britisk sanger og sangskriver med en kraftfuld stemme og hjerteskærende tekster."
+    },
+    {
+        "name": "Taylor Swift",
+        "birthdate": "1989-12-13",
+        "activeSince": "2006",
+        "genres": ["Country", "Pop"],
+        "labels": ["Big Machine Records", "Republic Records"],
+        "website": "https://www.taylorswift.com/",
+        "image": "taylorswift.jpg",
+        "shortDescription": "En af de mest succesrige popstjerner i verden med en lang række hits."
+    },
+    {
+        "name": "Ed Sheeran",
+        "birthdate": "1991-02-17",
+        "activeSince": "2004",
+        "genres": ["Pop", "Singer-Songwriter"],
+        "labels": ["Atlantic Records", "Asylum Records"],
+        "website": "https://www.edsheeran.com/",
+        "image": "edsheeran.jpg",
+        "shortDescription": "En britisk sanger og sangskriver kendt for sin melodiske musik."
+    },
+    {
+        "name": "Kanye West",
+        "birthdate": "1977-06-08",
+        "activeSince": "2000",
+        "genres": ["Rap", "Hip-Hop"],
+        "labels": ["Def Jam Recordings", "GOOD Music"],
+        "website": "https://www.kanyewest.com/",
+        "image": "kanyewest.jpg",
+        "shortDescription": "En kontroversiel rapper og producent med en unik musikstil."
+    },
+    {
+        "name": "Rihanna",
+        "birthdate": "1988-02-20",
+        "activeSince": "2005",
+        "genres": ["R&B", "Pop"],
+        "labels": ["Def Jam Recordings", "Roc Nation"],
+        "website": "https://www.rihannanow.com/",
+        "image": "rihanna.jpg",
+        "shortDescription": "En popikon kendt for hendes hits og alsidighed som kunstner."
+    },
+    {
+        "name": "Bruno Mars",
+        "birthdate": "1985-10-08",
+        "activeSince": "2004",
+        "genres": ["Pop", "R&B"],
+        "labels": ["Atlantic Records", "Warner Music Group"],
+        "website": "https://www.brunomars.com/",
+        "image": "brunomars.jpg",
+        "shortDescription": "En multitalentfuld sanger, sangskriver og producer med et funk-inspireret lyd."
+    },
+    {
+        "name": "Billie Eilish",
+        "birthdate": "2001-12-18",
+        "activeSince": "2015",
+        "genres": ["Pop", "Electropop"],
+        "labels": ["Darkroom", "Interscope Records"],
+        "website": "https://www.billieeilish.com/",
+        "image": "billieeilish.jpg",
+        "shortDescription": "En ung popstjerne og sangskriver med en unik stil."
+    },
+    {
+        "name": "Elton John",
+        "birthdate": "1947-03-25",
+        "activeSince": "1964",
+        "genres": ["Rock", "Pop"],
+        "labels": ["Rocket", "MCA Records"],
+        "website": "https://www.eltonjohn.com/",
+        "image": "eltonjohn.jpg",
+        "shortDescription": "En legendarisk pop- og rockmusiker med et utal af hits."
+    },
+    {
+        "name": "Ariana Grande",
+        "birthdate": "1993-06-26",
+        "activeSince": "2008",
+        "genres": ["Pop", "R&B"],
+        "labels": ["Republic Records"],
+        "website": "https://www.arianagrande.com/",
+        "image": "arianagrande.jpg",
+        "shortDescription": "En talentfuld sangerinde kendt for hendes stærke vokale præstationer."
+    },
+    {
+        "name": "Justin Bieber",
+        "birthdate": "1994-03-01",
+        "activeSince": "2007",
+        "genres": ["Pop", "R&B"],
+        "labels": ["Def Jam Recordings", "RBMG"],
+        "website": "https://www.justinbiebermusic.com/",
+        "image": "justinbieber.jpg",
+        "shortDescription": "En canadisk popstjerne, der blev opdaget på YouTube og blev en verdenskendt kunstner."
+    },
+    {
+        "name": "Lady Gaga",
+        "birthdate": "1986-03-28",
+        "activeSince": "2005",
+        "genres": ["Pop", "Dance"],
+        "labels": ["Interscope Records"],
+        "website": "https://www.ladygaga.com/",
+        "image": "ladygaga.jpg",
+        "shortDescription": "En ekscentrisk og kreativ popkunstner med en unik stil og visuel æstetik."
+    },
+    {
+        "name": "Drake",
+        "birthdate": "1986-10-24",
+        "activeSince": "2001",
+        "genres": ["Rap", "Hip-Hop"],
+        "labels": ["OVO Sound", "Republic Records"],
+        "website": "https://www.drakeofficial.com/",
+        "image": "drake.jpg",
+        "shortDescription": "En af de mest kommercielt succesrige rappere i nyere tid med en lang række hits."
+    }
+]
