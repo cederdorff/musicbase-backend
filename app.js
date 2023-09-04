@@ -106,6 +106,7 @@ app.get("/favorites", async (request, response) => {
     response.json(favorites);
 });
 
+// POST ROUTE "/favorites" - add favorite, expected format for request body: {id: 3}
 app.post("/favorites", async (request, response) => {
     const favId = request.body.id; // {id: favId}
     const favoriteIds = await readFavorites();
