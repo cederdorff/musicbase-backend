@@ -39,7 +39,12 @@ app.get("/artists/:id", async (request, response) => {
     const id = Number(request.params.id);
     const artists = await readArtists();
     const result = artists.find(artist => artist.id === id);
-    response.json(result);
+
+    if (!result) {
+        response.status(404).json({ error: "Artist not found!" });
+    } else {
+        response.json(result);
+    }
 });
 
 // POST ROUTE "/artists" - CREATE NEW ARTIST
@@ -49,10 +54,17 @@ app.post("/artists", async (request, response) => {
         ...request.body
     };
     const artists = await readArtists();
-    artists.push(newArtist);
-    console.log(artists);
-    wrireArtists(artists);
-    response.json(artists);
+
+    const exists = artists.find(artist => artist.name.toLocaleLowerCase() === newArtist.name.toLocaleLowerCase());
+
+    if (exists) {
+        response.status(400).json({ error: "Artist already exists!" });
+    } else {
+        artists.push(newArtist);
+        console.log(artists);
+        wrireArtists(artists);
+        response.json(artists);
+    }
 });
 
 // PUT ROUTE "/artists/:id" - UPDATE ARTIST
