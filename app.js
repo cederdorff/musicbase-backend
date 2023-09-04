@@ -14,11 +14,12 @@ app.listen(port, () => {
 });
 
 // ========== REST ROUTES ========== //
-
 // GET ROUTE "/"
 app.get("/", (request, response) => {
     response.send("Node Express Musicbase REST API");
 });
+
+// ---------- "/artists" ----------//
 
 // GET ROUTE "/artists" - get all artists
 app.get("/artists", async (request, response) => {
@@ -95,7 +96,7 @@ app.delete("/artists/:id", async (request, response) => {
     response.json(results);
 });
 
-// favorites routes
+// ---------- "/favorites" ----------//
 // GET ROUTE "/favorites" - get all favorites
 app.get("/favorites", async (request, response) => {
     const favoriteIds = await readFavorites();
@@ -119,6 +120,7 @@ app.post("/favorites", async (request, response) => {
     response.json(favorites);
 });
 
+// DELETE ROUTE - delete existing fav by id
 app.delete("/favorites/:id", async (request, response) => {
     const favId = Number(request.params.id);
     const favs = await readFavorites();
@@ -138,6 +140,8 @@ app.delete("/favorites/:id", async (request, response) => {
 
 // ========== HELPER FUNCTIONS ========== //
 
+// ---------- "/artists" ----------//
+
 async function readArtists() {
     const json = await fs.readFile("./data/artists.json");
     return JSON.parse(json);
@@ -147,6 +151,8 @@ async function writeArtists(artists) {
     const json = JSON.stringify(artists);
     await fs.writeFile("./data/artists.json", json);
 }
+
+// ---------- "/favorites" ----------//
 async function readFavorites() {
     const json = await fs.readFile("./data/favorites.json");
     return JSON.parse(json);
