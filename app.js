@@ -62,7 +62,7 @@ app.post("/artists", async (request, response) => {
     } else {
         artists.push(newArtist);
         console.log(artists);
-        wrireArtists(artists);
+        writeArtists(artists);
         response.json(artists);
     }
 });
@@ -82,7 +82,7 @@ app.put("/artists/:id", async (request, response) => {
     result.image = artist.image;
     result.shortDescription = artist.shortDescription;
 
-    wrireArtists(artists);
+    writeArtists(artists);
     response.json(artists);
 });
 
@@ -91,8 +91,48 @@ app.delete("/artists/:id", async (request, response) => {
     const id = Number(request.params.id);
     const artists = await readArtists();
     const results = artists.filter(artist => artist.id != id);
-    wrireArtists(results);
+    writeArtists(results);
     response.json(results);
+});
+
+// favorites routes
+// GET ROUTE "/favorites" - get all favorites
+app.get("/favorites", async (request, response) => {
+    const favoriteIds = await readFavorites();
+
+    const artists = await readArtists();
+    const favorites = artists.filter(artist => favoriteIds.includes(artist.id));
+
+    response.json(favorites);
+});
+
+app.post("/favorites", async (request, response) => {
+    const favId = request.body.id; // {id: favId}
+    const favoriteIds = await readFavorites();
+    favoriteIds.push(favId);
+    writeFavorites(favoriteIds);
+
+    const artists = await readArtists();
+    const favorites = artists.filter(artist => favoriteIds.includes(artist.id));
+
+    response.json(favorites);
+});
+
+app.delete("/favorites/:id", async (request, response) => {
+    const favId = Number(request.params.id);
+    const favs = await readFavorites();
+
+    if (favs.includes(favId)) {
+        const newFavs = favs.filter(id => id !== favId);
+        writeFavorites(newFavs);
+
+        const artists = await readArtists();
+        const favorites = artists.filter(artist => newFavs.includes(artist.id));
+
+        response.json(favorites);
+    } else {
+        response.status(404).json({ error: "Favorites does not contain the id!" });
+    }
 });
 
 // ========== HELPER FUNCTIONS ========== //
@@ -102,7 +142,16 @@ async function readArtists() {
     return JSON.parse(json);
 }
 
-async function wrireArtists(artists) {
+async function writeArtists(artists) {
     const json = JSON.stringify(artists);
     await fs.writeFile("./data/artists.json", json);
+}
+async function readFavorites() {
+    const json = await fs.readFile("./data/favorites.json");
+    return JSON.parse(json);
+}
+
+async function writeFavorites(favorites) {
+    const json = JSON.stringify(favorites);
+    await fs.writeFile("./data/favorites.json", json);
 }
