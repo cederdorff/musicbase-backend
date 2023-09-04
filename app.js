@@ -110,12 +110,14 @@ app.get("/favorites", async (request, response) => {
 // POST ROUTE "/favorites" - add favorite, expected format for request body: {id: 3}
 app.post("/favorites", async (request, response) => {
     const favId = request.body.id; // {id: favId}
-    const favoriteIds = await readFavorites();
-    favoriteIds.push(favId);
-    writeFavorites(favoriteIds);
+    const favs = await readFavorites();
 
+    if (!favs.includes(favId)) {
+        favs.push(favId);
+        writeFavorites(favs);
+    }
     const artists = await readArtists();
-    const favorites = artists.filter(artist => favoriteIds.includes(artist.id));
+    const favorites = artists.filter(artist => favs.includes(artist.id));
 
     response.json(favorites);
 });
@@ -148,7 +150,7 @@ async function readArtists() {
 }
 
 async function writeArtists(artists) {
-    const json = JSON.stringify(artists);
+    const json = JSON.stringify(artists, null, 2);
     await fs.writeFile("./data/artists.json", json);
 }
 
@@ -159,6 +161,6 @@ async function readFavorites() {
 }
 
 async function writeFavorites(favorites) {
-    const json = JSON.stringify(favorites);
+    const json = JSON.stringify(favorites, null, 2);
     await fs.writeFile("./data/favorites.json", json);
 }
