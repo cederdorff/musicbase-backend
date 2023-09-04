@@ -5,7 +5,7 @@ import fs from "fs/promises";
 
 // ========== APP SETUP ========== //
 const app = express();
-const port = process.env.SERVER_PORT || 3333;
+const port = 3333;
 app.use(express.json()); // to parse JSON bodies
 app.use(cors());
 
