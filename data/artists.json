@@ -1,6 +1,6 @@
 [
     {
-        "id": "1",
+        "id": 1,
         "name": "Beyoncé",
         "birthdate": "1981-09-04",
         "activeSince": "1997-1998",
@@ -11,7 +11,7 @@
         "shortDescription": "En ikonisk R&B- og popkunstner kendt for hendes enestående sangtalent og scenepresence."
     },
     {
-        "id": "2",
+        "id": 2,
         "name": "Eminem",
         "birthdate": "1972-10-17",
         "activeSince": "1992-1996",
@@ -22,7 +22,7 @@
         "shortDescription": "En af de mest indflydelsesrige rappere nogensinde med en imponerende lyrisk evne."
     },
     {
-        "id": "3",
+        "id": 3,
         "name": "Adele",
         "birthdate": "1988-05-05",
         "activeSince": "2006-2008",
@@ -33,7 +33,7 @@
         "shortDescription": "En britisk sanger og sangskriver med en kraftfuld stemme og hjerteskærende tekster."
     },
     {
-        "id": "4",
+        "id": 4,
         "name": "Taylor Swift",
         "birthdate": "1989-12-13",
         "activeSince": "2006",
@@ -44,7 +44,7 @@
         "shortDescription": "En af de mest succesrige popstjerner i verden med en lang række hits."
     },
     {
-        "id": "5",
+        "id": 5,
         "name": "Ed Sheeran",
         "birthdate": "1991-02-17",
         "activeSince": "2004",
@@ -55,7 +55,7 @@
         "shortDescription": "En britisk sanger og sangskriver kendt for sin melodiske musik."
     },
     {
-        "id": "6",
+        "id": 6,
         "name": "Kanye West",
         "birthdate": "1977-06-08",
         "activeSince": "2000",
@@ -66,7 +66,7 @@
         "shortDescription": "En kontroversiel rapper og producent med en unik musikstil."
     },
     {
-        "id": "7",
+        "id": 7,
         "name": "Rihanna",
         "birthdate": "1988-02-20",
         "activeSince": "2005",
@@ -77,7 +77,7 @@
         "shortDescription": "En popikon kendt for hendes hits og alsidighed som kunstner."
     },
     {
-        "id": "8",
+        "id": 8,
         "name": "Bruno Mars",
         "birthdate": "1985-10-08",
         "activeSince": "2004",
@@ -88,7 +88,7 @@
         "shortDescription": "En multitalentfuld sanger, sangskriver og producer med et funk-inspireret lyd."
     },
     {
-        "id": "9",
+        "id": 9,
         "name": "Billie Eilish",
         "birthdate": "2001-12-18",
         "activeSince": "2015",
@@ -99,7 +99,7 @@
         "shortDescription": "En ung popstjerne og sangskriver med en unik stil."
     },
     {
-        "id": "10",
+        "id": 10,
         "name": "Elton John",
         "birthdate": "1947-03-25",
         "activeSince": "1964",
@@ -110,7 +110,7 @@
         "shortDescription": "En legendarisk pop- og rockmusiker med et utal af hits."
     },
     {
-        "id": "11",
+        "id": 11,
         "name": "Ariana Grande",
         "birthdate": "1993-06-26",
         "activeSince": "2008",
@@ -121,7 +121,7 @@
         "shortDescription": "En talentfuld sangerinde kendt for hendes stærke vokale præstationer."
     },
     {
-        "id": "12",
+        "id": 12,
         "name": "Justin Bieber",
         "birthdate": "1994-03-01",
         "activeSince": "2007",
@@ -132,7 +132,7 @@
         "shortDescription": "En canadisk popstjerne, der blev opdaget på YouTube og blev en verdenskendt kunstner."
     },
     {
-        "id": "13",
+        "id": 13,
         "name": "Lady Gaga",
         "birthdate": "1986-03-28",
         "activeSince": "2005",
@@ -143,7 +143,7 @@
         "shortDescription": "En ekscentrisk og kreativ popkunstner med en unik stil og visuel æstetik."
     },
     {
-        "id": "14",
+        "id": 14,
         "name": "Drake",
         "birthdate": "1986-10-24",
         "activeSince": "2001",
@@ -154,7 +154,7 @@
         "shortDescription": "En af de mest kommercielt succesrige rappere i nyere tid med en lang række hits."
     },
     {
-        "id": "15",
+        "id": 15,
         "name": "Kendrick Lamar",
         "birthdate": "1987-06-17",
         "activeSince": "2003",
@@ -165,7 +165,7 @@
         "shortDescription": "En anerkendt rapper og tekstforfatter med dybe og politisk engagerede tekster."
     },
     {
-        "id": "16",
+        "id": 16,
         "name": "Katy Perry",
         "birthdate": "1984-10-25",
         "activeSince": "2001",
@@ -176,7 +176,7 @@
         "shortDescription": "En populær popstjerne kendt for hendes energiske hits og farverige udseende."
     },
     {
-        "id": "17",
+        "id": 17,
         "name": "John Legend",
         "birthdate": "1978-12-28",
         "activeSince": "2004",
@@ -187,7 +187,7 @@
         "shortDescription": "En talentfuld sanger og pianist kendt for sine følelsesladede ballader."
     },
     {
-        "id": "18",
+        "id": 18,
         "name": "Shakira",
         "birthdate": "1977-02-02",
         "activeSince": "1990",
@@ -198,7 +198,7 @@
         "shortDescription": "En colombiansk sangerinde og danser kendt for hendes livlige musik og dansestil."
     },
     {
-        "id": "19",
+        "id": 19,
         "name": "Chris Martin",
         "birthdate": "1977-03-02",
         "activeSince": "1996",
@@ -209,7 +209,7 @@
         "shortDescription": "Forsangeren for det berømte band Coldplay og en talentfuld sangskriver."
     },
     {
-        "id": "20",
+        "id": 20,
         "name": "Alicia Keys",
         "birthdate": "1981-01-25",
         "activeSince": "1995",
