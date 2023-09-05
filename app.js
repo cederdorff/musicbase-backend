@@ -63,7 +63,7 @@ app.post("/artists", async (request, response) => {
         artists.push(newArtist);
         console.log(artists);
         wrireArtists(artists);
-        response.json(artists);
+        response.status(201).json(artists);
     }
 });
 
