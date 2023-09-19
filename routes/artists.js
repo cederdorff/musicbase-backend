@@ -19,8 +19,9 @@ artistsRouter.get("/", (request, response) => {
 });
 
 // GET Endpoint "/artists/search?q=taylor" - get all artists
+// Ex: http://localhost:3333/artists/search?q=cy
 artistsRouter.get("/search", (request, response) => {
-    const query = request.query.q.toLocaleLowerCase();
+    const query = request.query.q;
     const queryString = /*sql*/ `
     SELECT * 
     FROM artists
