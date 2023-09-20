@@ -15,7 +15,7 @@ albumsRouter.get("/", async (request, response) => {
             LEFT JOIN artists_songs ON songs.id = artists_songs.song_id
             LEFT JOIN artists ON artists_songs.artist_id = artists.id;
     `;
-    const [results, fields] = await dbConnection.execute(query);
+    const [results] = await dbConnection.execute(query);
     response.json(results);
 });
 
@@ -40,7 +40,7 @@ albumsRouter.get("/", async (request, response) => {
 //     `;
 //     const values = [id];
 
-//     const [results, fields] = await dbConnection.execute(query, values);
+//     const [results] = await dbConnection.execute(query, values);
 // response.json(results);
 // });
 
@@ -67,7 +67,7 @@ albumsRouter.get("/:id", async (request, response) => {
     `;
     const values = [id];
 
-    const [results, fields] = await dbConnection.execute(query, values);
+    const [results] = await dbConnection.execute(query, values);
 
     if (results[0]) {
         const album = results[0];
@@ -114,7 +114,7 @@ albumsRouter.get("/:id/songs", async (request, response) => {
     `;
     const values = [id];
 
-    const [results, fields] = await dbConnection.execute(query, values);
+    const [results] = await dbConnection.execute(query, values);
 
     if (results.length) {
         response.json(results);

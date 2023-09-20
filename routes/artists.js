@@ -9,7 +9,7 @@ artistsRouter.get("/", async (request, response) => {
     SELECT * 
     FROM artists ORDER BY name;`;
 
-    const [results, fields] = await dbConnection.execute(query);
+    const [results] = await dbConnection.execute(query);
     response.json(results);
 });
 
@@ -24,7 +24,7 @@ artistsRouter.get("/search", async (request, response) => {
     ORDER BY name`;
     const values = [`%${searchString}%`];
 
-    const [results, fields] = await dbConnection.execute(query, values);
+    const [results] = await dbConnection.execute(query, values);
     response.json(results);
 });
 
@@ -36,7 +36,7 @@ artistsRouter.get("/:id", async (request, response) => {
     FROM artists WHERE id=?;`; // sql query
     const values = [id];
 
-    const [results, fields] = await dbConnection.execute(query, values);
+    const [results] = await dbConnection.execute(query, values);
     response.json(results);
 });
 
@@ -57,7 +57,7 @@ artistsRouter.get("/:id/albums", async (request, response) => {
 
     const values = [id];
 
-    const [results, fields] = await dbConnection.execute(query, values);
+    const [results] = await dbConnection.execute(query, values);
     response.json(results);
 });
 

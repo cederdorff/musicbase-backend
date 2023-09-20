@@ -16,7 +16,7 @@ songsRouter.get("/", async (request, response) => {
     
     `;
 
-    const [results, fields] = await dbConnection.execute(query);
+    const [results] = await dbConnection.execute(query);
     response.json(results);
 });
 
@@ -34,7 +34,7 @@ songsRouter.get("/:id", async (request, response) => {
             WHERE songs.id = ?;`; // sql query
     const values = [id];
 
-    const [results, fields] = await dbConnection.execute(query, values);
+    const [results] = await dbConnection.execute(query, values);
     response.json(results);
 });
 
