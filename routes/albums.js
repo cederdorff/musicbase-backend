@@ -4,8 +4,8 @@ import dbConnection from "../db-connect.js";
 const albumsRouter = Router();
 
 // GET Endpoint "/albums" - get all albums
-albumsRouter.get("/", (request, response) => {
-    const queryString = /*sql*/ `
+albumsRouter.get("/", async (request, response) => {
+    const query = /*sql*/ `
             SELECT DISTINCT albums.*,
                 artists.name AS artistName,
                 artists.id AS artistId
@@ -15,20 +15,15 @@ albumsRouter.get("/", (request, response) => {
             LEFT JOIN artists_songs ON songs.id = artists_songs.song_id
             LEFT JOIN artists ON artists_songs.artist_id = artists.id;
     `;
-    dbConnection.query(queryString, (error, results) => {
-        if (error) {
-            console.log(error);
-        } else {
-            response.json(results);
-        }
-    });
+    const [results, fields] = await dbConnection.execute(query);
+    response.json(results);
 });
 
 // GET Endpoint "/albums/:id"
-// albumsRouter.get("/:id", (request, response) => {
+// albumsRouter.get("/:id", async (request, response) => {
 //     const id = request.params.id;
 
-//     const queryString = /*sql*/ `
+//     const query = /*sql*/ `
 //             SELECT albums.*,
 //                 artists.name AS artistName,
 //                 songs.id AS songId,
@@ -45,24 +40,15 @@ albumsRouter.get("/", (request, response) => {
 //     `;
 //     const values = [id];
 
-//     dbConnection.query(queryString, values, (error, results) => {
-//         if (error) {
-//             console.log(error);
-//         } else {
-//             if (results[0]) {
-//                 response.json(results);
-//             } else {
-//                 response.json({ message: "No album found" });
-//             }
-//         }
-//     });
+//     const [results, fields] = await dbConnection.execute(query, values);
+// response.json(results);
 // });
 
 // GET Endpoint "/albums/:id"
-albumsRouter.get("/:id", (request, response) => {
+albumsRouter.get("/:id", async (request, response) => {
     const id = request.params.id;
 
-    const queryString = /*sql*/ `
+    const query = /*sql*/ `
             SELECT albums.*,
                 artists.name AS artistName,
                 albums_songs.position,
@@ -81,40 +67,36 @@ albumsRouter.get("/:id", (request, response) => {
     `;
     const values = [id];
 
-    dbConnection.query(queryString, values, (error, results) => {
-        if (error) {
-            console.log(error);
-        } else {
-            if (results[0]) {
-                const album = results[0];
-                const albumWithSongs = {
-                    id: album.id,
-                    title: album.title,
-                    releaseDate: album.release_date,
-                    songs: results.map(song => {
-                        return {
-                            id: song.songId,
-                            title: song.songTitle,
-                            length: song.songLength,
-                            releaseDate: song.songReleaseDate,
-                            position: song.position
-                        };
-                    })
-                };
+    const [results, fields] = await dbConnection.execute(query, values);
 
-                response.json(albumWithSongs);
-            } else {
-                response.json({ message: "No album found" });
-            }
-        }
-    });
+    if (results[0]) {
+        const album = results[0];
+        const albumWithSongs = {
+            id: album.id,
+            title: album.title,
+            releaseDate: album.release_date,
+            songs: results.map(song => {
+                return {
+                    id: song.songId,
+                    title: song.songTitle,
+                    length: song.songLength,
+                    releaseDate: song.songReleaseDate,
+                    position: song.position
+                };
+            })
+        };
+
+        response.json(albumWithSongs);
+    } else {
+        response.json({ message: "No album found" });
+    }
 });
 
 // GET Endpoint "/albums/:id/songs" - get album with songs
-albumsRouter.get("/:id/songs", (request, response) => {
+albumsRouter.get("/:id/songs", async (request, response) => {
     const id = request.params.id;
 
-    const queryString = /*sql*/ `
+    const query = /*sql*/ `
         SELECT albums.id AS albumId,
             albums.title AS albumTitle,
             albums.release_date AS albumReleaseDate,
@@ -132,17 +114,13 @@ albumsRouter.get("/:id/songs", (request, response) => {
     `;
     const values = [id];
 
-    dbConnection.query(queryString, values, (error, results) => {
-        if (error) {
-            console.log(error);
-        } else {
-            if (results.length) {
-                response.json(results);
-            } else {
-                response.json({ message: "No album found" });
-            }
-        }
-    });
+    const [results, fields] = await dbConnection.execute(query, values);
+
+    if (results.length) {
+        response.json(results);
+    } else {
+        response.json({ message: "No album found" });
+    }
 });
 
 export default albumsRouter;

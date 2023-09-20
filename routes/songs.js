@@ -4,8 +4,8 @@ import dbConnection from "../db-connect.js";
 const songsRouter = Router();
 
 // GET Endpoint "/songs" - get all songs
-songsRouter.get("/", (request, response) => {
-    const queryString = /*sql*/ `
+songsRouter.get("/", async (request, response) => {
+    const query = /*sql*/ `
             SELECT songs.*,
                     artists.name AS artistName,
                     artists.id AS artistId,
@@ -16,19 +16,14 @@ songsRouter.get("/", (request, response) => {
     
     `;
 
-    dbConnection.query(queryString, (error, results) => {
-        if (error) {
-            console.log(error);
-        } else {
-            response.json(results);
-        }
-    });
+    const [results, fields] = await dbConnection.execute(query);
+    response.json(results);
 });
 
 // GET Endpoint "/songs/:id" - get one song
-songsRouter.get("/:id", (request, response) => {
+songsRouter.get("/:id", async (request, response) => {
     const id = request.params.id;
-    const queryString = /*sql*/ `
+    const query = /*sql*/ `
             SELECT songs.*,
                     artists.name AS artistName,
                     artists.id AS artistId,
@@ -39,13 +34,8 @@ songsRouter.get("/:id", (request, response) => {
             WHERE songs.id = ?;`; // sql query
     const values = [id];
 
-    dbConnection.query(queryString, values, (error, results) => {
-        if (error) {
-            console.log(error);
-        } else {
-            response.json(results[0]);
-        }
-    });
+    const [results, fields] = await dbConnection.execute(query, values);
+    response.json(results);
 });
 
 export default songsRouter;

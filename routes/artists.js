@@ -4,61 +4,47 @@ import dbConnection from "../db-connect.js";
 const artistsRouter = Router();
 
 // GET Endpoint "/artists" - get all artists
-artistsRouter.get("/", (request, response) => {
-    const queryString = /*sql*/ `
+artistsRouter.get("/", async (request, response) => {
+    const query = /*sql*/ `
     SELECT * 
     FROM artists ORDER BY name;`;
 
-    dbConnection.query(queryString, (error, results) => {
-        if (error) {
-            console.log(error);
-        } else {
-            response.json(results);
-        }
-    });
+    const [results, fields] = await dbConnection.execute(query);
+    response.json(results);
 });
 
 // GET Endpoint "/artists/search?q=taylor" - get all artists
 // Ex: http://localhost:3333/artists/search?q=cy
-artistsRouter.get("/search", (request, response) => {
-    const query = request.query.q;
-    const queryString = /*sql*/ `
+artistsRouter.get("/search", async (request, response) => {
+    const searchString = request.query.q;
+    const query = /*sql*/ `
     SELECT * 
     FROM artists
     WHERE name LIKE ?
     ORDER BY name`;
-    const values = [`%${query}%`];
-    dbConnection.query(queryString, values, (error, results) => {
-        if (error) {
-            console.log(error);
-        } else {
-            response.json(results);
-        }
-    });
+    const values = [`%${searchString}%`];
+
+    const [results, fields] = await dbConnection.execute(query, values);
+    response.json(results);
 });
 
 // GET Endpoint "/artists/:id" - get one artist
-artistsRouter.get("/:id", (request, response) => {
+artistsRouter.get("/:id", async (request, response) => {
     const id = request.params.id;
-    const queryString = /*sql*/ `
+    const query = /*sql*/ `
     SELECT * 
     FROM artists WHERE id=?;`; // sql query
     const values = [id];
 
-    dbConnection.query(queryString, values, (error, results) => {
-        if (error) {
-            console.log(error);
-        } else {
-            response.json(results[0]);
-        }
-    });
+    const [results, fields] = await dbConnection.execute(query, values);
+    response.json(results);
 });
 
 // GET Endpoint "/artists/:id" - get one artist
-artistsRouter.get("/:id/albums", (request, response) => {
+artistsRouter.get("/:id/albums", async (request, response) => {
     const id = request.params.id;
 
-    const queryString = /*sql*/ `
+    const query = /*sql*/ `
         SELECT DISTINCT albums.*, 
                         artists.name AS artistName,
                         artists.id AS artistId
@@ -71,13 +57,8 @@ artistsRouter.get("/:id/albums", (request, response) => {
 
     const values = [id];
 
-    dbConnection.query(queryString, values, (error, results) => {
-        if (error) {
-            console.log(error);
-        } else {
-            response.json(results);
-        }
-    });
+    const [results, fields] = await dbConnection.execute(query, values);
+    response.json(results);
 });
 
 export default artistsRouter;
