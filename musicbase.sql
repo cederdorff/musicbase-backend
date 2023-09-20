@@ -1,5 +1,5 @@
 -- slet database
-DROP DATABASE musicbase;
+DROP DATABASE IF EXISTS musicbase;
 
 -- opret database
 CREATE DATABASE musicbase;
