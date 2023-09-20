@@ -40,17 +40,20 @@ songsRouter.get("/:id", async (request, response) => {
 
 songsRouter.post("/", async (request, response) => {
     const song = request.body;
+
+    // create new song
     const songQuery = "INSERT INTO songs (title, release_date, length) VALUES(?, ?, ?)";
     const songValues = [song.title, song.releaseDate, song.length];
 
-    const [songResult, fields] = await dbConnection.execute(songQuery, songValues);
-
+    const [songResult] = await dbConnection.execute(songQuery, songValues);
+    // id of newly created song
     const newSongId = songResult.insertId;
 
+    // create new arist-song relation in artists_songs
     const artistSongQuery = "INSERT INTO artists_songs (artist_id, song_id) VALUES(?, ?)";
     const artistSongValues = [song.artistId, newSongId];
 
-    const [artistSongResult, artistSongFields] = await dbConnection.execute(artistSongQuery, artistSongValues);
+    const [artistSongResult] = await dbConnection.execute(artistSongQuery, artistSongValues);
     console.log(artistSongResult);
 
     response.json({ message: "New song created!" });
