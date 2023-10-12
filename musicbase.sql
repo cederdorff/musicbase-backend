@@ -51,6 +51,16 @@ CREATE TABLE albums_songs (
     FOREIGN KEY (song_id) REFERENCES songs(id)
 );
 
+-- Opret tabel for kunstnere-albums-forhold
+CREATE TABLE artists_albums (
+    artist_id INT,
+    album_id INT,
+    PRIMARY KEY (artist_id, album_id),
+    FOREIGN KEY (artist_id) REFERENCES artists(id),
+    FOREIGN KEY (album_id) REFERENCES albums(id)
+);
+
+
 -- Indsæt data for kunstnere
 INSERT INTO artists (name, genre, image, birthdate, gender) VALUES
     ('Adele', 'Pop', 'https://upload.wikimedia.org/wikipedia/commons/5/52/Adele_for_Vogue_in_2021.png', '1988-05-05', 'Female'),
@@ -97,6 +107,13 @@ INSERT INTO albums (title, release_date) VALUES
     ('Dangerously in Love', '2003-06-24'),
     ('Flowers', '2023-03-10'),
     ('30', '2021-11-19');
+
+INSERT INTO artists_albums (artist_id, album_id) VALUES
+    (1, 1),
+    (1, 5),
+    (2, 2),
+    (3, 3),
+    (4, 4);
 
 -- Indsæt data for albums-sange-forhold
 INSERT INTO albums_songs (album_id, song_id, position) VALUES
@@ -269,3 +286,13 @@ SELECT DISTINCT albums.*,
             JOIN songs ON albums_songs.song_id = songs.id
             JOIN artists_songs ON songs.id = artists_songs.song_id
             JOIN artists ON artists_songs.artist_id = artists.id;
+
+SELECT artists.name AS artist_name,
+       artists.image AS artist_image,
+       albums.title AS album_title,
+       albums.release_date AS album_release_date
+FROM artists
+JOIN artists_albums ON artists.id = artists_albums.artist_id
+JOIN albums ON artists_albums.album_id = albums.id
+ORDER BY artists.name;
+
