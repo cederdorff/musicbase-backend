@@ -6,14 +6,13 @@ const albumsRouter = Router();
 // GET Endpoint "/albums" - get all albums
 albumsRouter.get("/", async (request, response) => {
     const query = /*sql*/ `
-            SELECT DISTINCT albums.*,
+            SELECT albums.*,
                 artists.name AS artistName,
                 artists.id AS artistId
-            FROM albums
-            LEFT JOIN albums_songs ON albums.id = albums_songs.album_id
-            LEFT JOIN songs ON albums_songs.song_id = songs.id
-            LEFT JOIN artists_songs ON songs.id = artists_songs.song_id
-            LEFT JOIN artists ON artists_songs.artist_id = artists.id;
+            FROM artists
+            JOIN artists_albums ON artists.id = artists_albums.artist_id
+            JOIN albums ON artists_albums.album_id = albums.id
+            ORDER BY artists.name;
     `;
     const [results] = await dbConnection.execute(query);
     response.json(results);
@@ -58,10 +57,10 @@ albumsRouter.get("/:id", async (request, response) => {
                 songs.release_date AS songReleaseDate,
                 artists.id AS artistId
             FROM albums
-            LEFT JOIN albums_songs ON albums.id = albums_songs.album_id
-            LEFT JOIN songs ON albums_songs.song_id = songs.id
-            LEFT JOIN artists_songs ON songs.id = artists_songs.song_id
-            LEFT JOIN artists ON artists_songs.artist_id = artists.id
+            INNER JOIN artists_albums ON albums.id = artists_albums.album_id
+            INNER JOIN artists ON artists_albums.artist_id = artists.id
+            INNER JOIN albums_songs ON albums.id = albums_songs.album_id
+            INNER JOIN songs ON albums_songs.song_id = songs.id
             WHERE albums.id = ?
             ORDER BY albums_songs.position;
     `;
@@ -75,6 +74,7 @@ albumsRouter.get("/:id", async (request, response) => {
             id: album.id,
             title: album.title,
             releaseDate: album.release_date,
+            artistName: album.artistName,
             songs: results.map(song => {
                 return {
                     id: song.songId,

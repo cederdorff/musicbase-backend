@@ -296,3 +296,33 @@ JOIN artists_albums ON artists.id = artists_albums.artist_id
 JOIN albums ON artists_albums.album_id = albums.id
 ORDER BY artists.name;
 
+SELECT albums.*,
+                artists.name AS artistName,
+                albums_songs.position,
+                songs.id AS songId,
+                songs.title AS songTitle,
+                songs.length AS songLength,
+                songs.release_date AS songReleaseDate,
+                artists.id AS artistId
+            FROM albums
+            LEFT JOIN albums_songs ON albums.id = albums_songs.album_id
+            LEFT JOIN songs ON albums_songs.song_id = songs.id
+            LEFT JOIN artists_songs ON songs.id = artists_songs.song_id
+            LEFT JOIN artists ON artists_songs.artist_id = artists.id
+            WHERE albums.id = 1
+            ORDER BY albums_songs.position;
+
+SELECT albums.*,
+       artists.name AS artistName,
+       albums_songs.position,
+       songs.id AS songId,
+       songs.title AS songTitle,
+       songs.length AS songLength,
+       songs.release_date AS songReleaseDate,
+       artists.id AS artistId
+FROM albums
+INNER JOIN artists_albums ON albums.id = artists_albums.album_id
+INNER JOIN artists ON artists_albums.artist_id = artists.id
+INNER JOIN albums_songs ON albums.id = albums_songs.album_id
+INNER JOIN songs ON albums_songs.song_id = songs.id
+WHERE albums.id = 2;

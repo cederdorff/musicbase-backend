@@ -32,8 +32,9 @@ artistsRouter.get("/search", async (request, response) => {
 artistsRouter.get("/:id", async (request, response) => {
     const id = request.params.id;
     const query = /*sql*/ `
-    SELECT * 
-    FROM artists WHERE id=?;`; // sql query
+        SELECT * 
+        FROM artists WHERE id=?;`; // sql query
+
     const values = [id];
 
     const [results] = await dbConnection.execute(query, values);
@@ -45,15 +46,13 @@ artistsRouter.get("/:id/albums", async (request, response) => {
     const id = request.params.id;
 
     const query = /*sql*/ `
-        SELECT DISTINCT albums.*, 
-                        artists.name AS artistName,
-                        artists.id AS artistId
+        SELECT DISTINCT albums.*,
+                artists.name AS artistName,
+                artists.id AS artistId
         FROM albums
-        LEFT JOIN albums_songs ON albums.id = albums_songs.album_id
-        LEFT JOIN songs ON albums_songs.song_id = songs.id
-        LEFT JOIN artists_songs ON songs.id = artists_songs.song_id
-        LEFT JOIN artists ON artists_songs.artist_id = artists.id
-        WHERE artists_songs.artist_id = ?;`;
+        INNER JOIN artists_albums ON albums.id = artists_albums.album_id
+        INNER JOIN artists ON artists_albums.artist_id = artists.id
+        WHERE artists.id = ?;`;
 
     const values = [id];
 
