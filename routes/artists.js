@@ -1,44 +1,42 @@
 import { Router } from "express";
-import dbConnection from "../db-connect.js";
+import { getDatabase } from "../db-connect.js";
+import { ObjectId } from "mongodb";
 
 const artistsRouter = Router();
 
 // GET Endpoint "/artists" - get all artists
 artistsRouter.get("/", async (request, response) => {
-    const query = /*sql*/ `
-    SELECT * 
-    FROM artists ORDER BY name;`;
-
-    const [results] = await dbConnection.execute(query);
-    response.json(results);
+    const db = await getDatabase();
+    const artistsCollection = db.collection("artists");
+    const artists = await artistsCollection.find().toArray(); // Use toArray() to retrieve documents as an array
+    response.json(artists);
 });
 
 // GET Endpoint "/artists/search?q=taylor" - get all artists
 // Ex: http://localhost:3333/artists/search?q=cy
 artistsRouter.get("/search", async (request, response) => {
     const searchString = request.query.q;
-    const query = /*sql*/ `
-    SELECT * 
-    FROM artists
-    WHERE name LIKE ?
-    ORDER BY name`;
-    const values = [`%${searchString}%`];
+    const db = await getDatabase();
+    const artistsCollection = db.collection("artists");
 
-    const [results] = await dbConnection.execute(query, values);
-    response.json(results);
+    const searchQuery = {
+        name: {
+            $regex: searchString, // Use the provided search string
+            $options: "i" // Case-insensitive search
+        }
+    };
+
+    const searchResult = await artistsCollection.find(searchQuery).toArray();
+    response.json(searchResult);
 });
 
 // GET Endpoint "/artists/:id" - get one artist
 artistsRouter.get("/:id", async (request, response) => {
     const id = request.params.id;
-    const query = /*sql*/ `
-        SELECT * 
-        FROM artists WHERE id=?;`; // sql query
-
-    const values = [id];
-
-    const [results] = await dbConnection.execute(query, values);
-    response.json(results);
+    const db = await getDatabase();
+    const artistsCollection = db.collection("artists");
+    const artists = await artistsCollection.findOne({ _id: new ObjectId(id) });
+    response.json(artists);
 });
 
 // GET Endpoint "/artists/:id" - get one artist

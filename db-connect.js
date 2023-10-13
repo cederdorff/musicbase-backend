@@ -7,13 +7,11 @@ const client = new MongoClient(uri);
 async function getDatabase() {
     try {
         await client.connect();
-        const db = client.db("posts_db");
+        const db = client.db("music_db");
         return db;
     } catch (error) {
         console.error("Failed to connect to the database:", error);
         throw error;
-    } finally {
-        await client.close();
     }
 }
 
