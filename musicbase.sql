@@ -67,8 +67,8 @@ INSERT INTO artists (name, genre, image, birthdate, gender) VALUES
     ('Ed Sheeran', 'Pop', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Ed_Sheeran-6886_%28cropped%29.jpg/500px-Ed_Sheeran-6886_%28cropped%29.jpg', '1991-02-17', 'Male'),
     ('Beyoncé', 'R&B', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Beyonc%C3%A9_at_The_Lion_King_European_Premiere_2019.png/500px-Beyonc%C3%A9_at_The_Lion_King_European_Premiere_2019.png', '1981-09-04', 'Female'),
     ('Miley Cyrus', 'Pop', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Miley_Cyrus_Primavera19_-226_%2848986293772%29_%28cropped%29.jpg/500px-Miley_Cyrus_Primavera19_-226_%2848986293772%29_%28cropped%29.jpg', '1992-11-23', 'Female'),
-    ('Ariana Grande', 'Pop', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Ariana_Grande_by_Marcus_Ingvarsson_%28SWE%29_%28cropped%29.png/500px-Ariana_Grande_by_Marcus_Ingvarsson_%28SWE%29_%28cropped%29.png', '1993-06-26', 'Female'),
-    ('Drake', 'Rap', 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Drake_2019_by_Glenn_Francis_%28cropped%29.jpg/500px-Drake_2019_by_Glenn_Francis_%28cropped%29.jpg', '1986-10-24', 'Male');
+    ('Ariana Grande', 'Pop', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Ariana_Grande_Grammys_Red_Carpet_2020.png/419px-Ariana_Grande_Grammys_Red_Carpet_2020.png', '1993-06-26', 'Female'),
+    ('Drake', 'Rap', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Drake_July_2016.jpg/440px-Drake_July_2016.jpg', '1986-10-24', 'Male');
 
 -- Indsæt data for sange
 INSERT INTO songs (title, release_date, length) VALUES
@@ -193,7 +193,6 @@ LEFT JOIN songs ON albums_songs.song_id = songs.id
 LEFT JOIN artists_songs ON songs.id = artists_songs.song_id
 LEFT JOIN artists ON artists_songs.artist_id = artists.id
 WHERE albums.id = 2;
-
 
 
 -- Join, Kunstnere og deres sange med albuminfo
