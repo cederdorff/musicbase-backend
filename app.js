@@ -1,9 +1,8 @@
 // ========== IMPORTS ========== //
-import express from "express";
 import cors from "cors";
-import dbConnection from "./db-connect.js";
-import artistsRouter from "./routes/artists.js";
+import express from "express";
 import albumsRouter from "./routes/albums.js";
+import artistsRouter from "./routes/artists.js";
 import songsRouter from "./routes/songs.js";
 
 // ========== APP SETUP ========== //
